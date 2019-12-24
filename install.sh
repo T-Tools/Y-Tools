@@ -9,5 +9,5 @@ cp Y-Tools /data/data/com.termux/files/usr/bin
 rm *
 cd /data/data/com.termux/files/usr/bin
 chmod +x Y-Tools
-echo "Finish,To Start My Tool Type (Y-Tools)
+echo "Finish,To Start My Tool Type (Y-Tools)"
 #End Of Setting Up
