@@ -4,7 +4,7 @@ echo "Setting Up Files" | lolcat -a -d 15
 pkg install figlet
 pkg install toilet
 gem install lolcat
-cp -r Termux.zip /data/data/com.termux/files/usr/share
+cp * /data/data/com.termux/files/usr/share
 cp Y-Tools /data/data/com.termux/files/usr/bin
 rm *
 cd /data/data/com.termux/files/usr/bin
