@@ -1,6 +1,6 @@
 # Coded By:-Yell Phone Naing
 if [ -d /data/data/com.termux/files/usr/share ];then
-  cd /data/data/com.termux/files/usr/share/
-unzip termux.zip
+  cd /data/data/com.termux/files/usr/share
+unzip Termux.zip
 sh start.sh
 fi
